@@ -52,6 +52,22 @@ used when comparing distances.
 ### lume.angle(x1, y1, x2, y2)
 Returns the angle between the two points.
 
+### lume.math_random([a [, b]])
+Returns a random number, matching the semantics of lua's standard
+[math.random][rand] function. This is the source of lume's randomness:
+replacing this function with an alternate random number generator in
+your application will supply that generator to all other lume functions.
+
+[rand]:http://www.lua.org/manual/5.3/manual.html#pdf-math.random
+```lua
+lume.math_random = function(a, b)
+	if a or b then return math.random(a, b) end
+	return .5
+end
+lume.random() -- Returns .5
+lume.random(1, 2) -- Returns 1.5
+```
+
 ### lume.random([a [, b]])
 Returns a random number between `a` and `b`. If only `a` is supplied a number
 between `0` and `a` is returned. If no arguments are supplied a random number
